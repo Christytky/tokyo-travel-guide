@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="yue-Hant-HK">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>池袋食品手信購物清單</title>
+  <style>
+    :root {
+      color: #282d29;
+      background: #f8f6f0;
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "PingFang HK", "Noto Sans CJK TC", sans-serif;
+      --green: #285948;
+      --muted: #565e55;
+      --line: #dedfd4;
+      --paper: #fffdf8;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(100% - 36px, 890px); margin: 0 auto; padding: 40px 0; }
+    header { padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+    h1, h2, h3, p { margin: 0; }
+    h1 { color: var(--green); font-size: clamp(2rem, 5vw, 3.15rem); line-height: 1.18; letter-spacing: -.035em; }
+    .meta { margin-top: 12px; color: var(--muted); font-size: .89rem; }
+    a { color: var(--green); text-underline-offset: .18em; }
+    a:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+    nav a { border: 1px solid var(--line); border-radius: 6px; background: var(--paper); text-decoration: none; padding: 5px 11px; font-size: .88rem; }
+    section { margin: 30px 0 0; scroll-margin-top: 16px; }
+    .place { color: var(--green); font-size: clamp(1.17rem, 3.5vw, 1.54rem); line-height: 1.35; }
+    .place span { display: inline-block; margin-right: .45em; }
+    .shop { margin: 5px 0 3px; color: var(--muted); font-size: .86rem; }
+    .products { display: grid; gap: 11px; margin-top: 12px; }
+    article { display: grid; grid-template-columns: 132px minmax(0, 1fr) max-content; gap: 18px; align-items: center; padding: 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; }
+    .photo { display: grid; align-content: center; justify-items: center; width: 100%; min-height: 112px; padding: 5px; color: var(--green); background: #f7f6f0; border-radius: 7px; overflow: hidden; text-align: center; }
+    .photo img { display: block; width: 100%; height: 104px; object-fit: contain; }
+    .photo-label { font-size: .73rem; }
+    .photo[data-state="unavailable"] img { display: none; }
+    .photo[data-state="unavailable"] .photo-label { font-size: .88rem; }
+    h3 { font-size: 1.12rem; line-height: 1.38; }
+    .jp { margin-top: 2px; color: var(--green); font-size: .85rem; overflow-wrap: anywhere; }
+    .description { margin-top: 5px; font-size: .87rem; }
+    .sources { margin-top: 6px; color: var(--muted); font-size: .76rem; }
+    .sources a { display: inline-block; margin-right: .6rem; }
+    .prices { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; text-align: right; font-variant-numeric: tabular-nums; }
+    .prices li { white-space: nowrap; }
+    .prices strong { color: var(--green); }
+    .prices small { display: block; color: var(--muted); font-size: .77rem; }
+    footer { margin-top: 32px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem; }
+    footer p + p { margin-top: 6px; }
+    @media (max-width: 660px) {
+      main { padding-top: 28px; }
+      article { grid-template-columns: 96px minmax(0, 1fr); align-items: start; gap: 9px 13px; padding: 12px; }
+      .photo { grid-row: 1 / 3; }
+      .photo img { height: 88px; }
+      .prices { grid-column: 2; grid-template-columns: repeat(auto-fit, minmax(94px, 1fr)); text-align: left; gap: 3px 10px; }
+      .prices li { white-space: normal; }
+    }
+    @media print {
+      :root { background: white; }
+      main { width: 100%; padding: 0; }
+      nav { display: none; }
+      article { break-inside: avoid; }
+    }
+  </style>
+  <script>
+    document.addEventListener("error", (event) => {
+      const image = event.target;
+      if (!(image instanceof HTMLImageElement) || !image.closest(".photo")) return;
+      if (image.dataset.backup) {
+        const backup = image.dataset.backup;
+        delete image.dataset.backup;
+        image.src = backup;
+        return;
+      }
+      image.closest(".photo").dataset.state = "unavailable";
+    }, true);
+  </script>
+</head>
+<body>
+<main>
+  <header>
+    <h1>池袋食品手信購物清單</h1>
+    <p class="meta">2026 年 11 月 25 日查價。日圓為含稅價或參考價，¥100 約 HK$4.92。池袋各店即時現貨未確認。<a href="https://wise.com/jp/currency-converter/jpy-to-hkd-rate/history">Wise 匯率</a></p>
+    <nav aria-label="跳到購買地點">
+      <a href="#tobu">東武 B1</a>
+      <a href="#seibu">西武 B1</a>
+      <a href="#isp">池袋ショッピングパーク B1</a>
+      <a href="#seiyu">サンシャイン西友 2F</a>
+    </nav>
+  </header>
+
+  <section id="tobu" aria-labelledby="tobu-heading">
+    <h2 class="place" id="tobu-heading"><span>池袋站西口</span> 東武百貨店池袋本店 B1・4 番地</h2>
+    <div class="products">
+      <article>
+        <a class="photo" href="https://cheesegarden.jp/products/goyotei-cheesecookie-8">
+          <img src="https://cheesegarden.jp/cdn/shop/files/CC_8__260221.jpg?v=1773107269&amp;width=480" data-backup="https://shop.r10s.jp/cheesegarden/cabinet/product/13025642/13025696/re05.jpg" alt="御用邸黑椒芝士曲奇禮盒">
+          <span class="photo-label">商品相來源</span>
+        </a>
+        <div>
+          <p class="shop" lang="ja">チーズガーデン</p>
+          <h3>御用邸黑椒芝士曲奇</h3>
+          <p class="jp" lang="ja">御用邸チーズクッキー</p>
+          <p class="description">巴馬臣、伊丹芝士同黑椒，帶少少甜。獨立包裝。製造起 85 日。</p>
+          <p class="sources"><a href="https://www.tobu-dept.jp/sp/ikebukuro/shop/102423301/2016/10">店舖</a><a href="https://www.tobu-online.jp/shopping/goods/index/er029/">8 件裝</a><a href="https://www.tobu-online.jp/shopping/goods/index/er028/">16 件裝</a></p>
+        </div>
+        <ul class="prices" aria-label="各尺寸價錢">
+          <li>8 件 <strong>¥1,200</strong><small>約 HK$59</small></li>
+          <li>16 件 <strong>¥2,300</strong><small>約 HK$113</small></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="seibu" aria-labelledby="seibu-heading">
+    <h2 class="place" id="seibu-heading"><span>池袋站東口</span> 西武池袋本店 B1</h2>
+    <div class="products">
+      <article>
+        <a class="photo" href="https://shop.gateaufesta-harada.com/shop/g/gSM0/">
+          <img src="data:image/webp;base64,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" alt="松露香脆多士 15 件簡裝盒">
+          <span class="photo-label">商品相來源</span>
+        </a>
+        <div>
+          <p class="shop" lang="ja">ガトーフェスタ ハラダ</p>
+          <h3>松露香脆多士</h3>
+          <p class="jp" lang="ja">グーテ・デ・ロワ ソムリエ</p>
+          <p class="description">松露香、芝士同炸洋蔥，偏鹹。獨立包裝。製造起 70 日。盒裝規格可打 <a href="tel:+81369125070">03-6912-5070</a> 問。</p>
+          <p class="sources"><a href="https://www.gateaufesta-harada.com/store/detail_kanto/16">店舖</a><a href="https://shop.gateaufesta-harada.com/shop/g/gSM0/">15 件簡裝</a><a href="https://shop.gateaufesta-harada.com/shop/g/gSM2/">28 件禮盒</a></p>
+        </div>
+        <ul class="prices" aria-label="各尺寸價錢">
+          <li>15 件 <strong>¥1,188</strong><small>簡裝・約 HK$58</small></li>
+          <li>28 件 <strong>¥2,700</strong><small>禮盒・約 HK$133</small></li>
+        </ul>
+      </article>
+      <article>
+        <a class="photo" href="https://prtimes.jp/main/html/rd/p/000002156.000025606.html">
+          <img src="https://prcdn.freetls.fastly.net/release_image/25606/2156/25606-2156-cb24b34e0ede73250df25639df899aec-1000x692.jpg?auto=webp&amp;bg-color=fff&amp;fit=bounds&amp;format=jpeg&amp;height=1350&amp;quality=85%2C75&amp;width=1950" data-backup="https://prcdn.freetls.fastly.net/release_image/25606/2156/25606-2156-7aff6ebddcaf4be04c5922d7c1d80664-1000x692.jpg?auto=webp&amp;bg-color=fff&amp;fit=bounds&amp;format=jpeg&amp;height=1350&amp;quality=85%2C75&amp;width=1950" alt="TOKYO TULIP ROSE 開心果莓果酥">
+          <span class="photo-label">商品相來源</span>
+        </a>
+        <div>
+          <p class="shop">TOKYO TULIP ROSE</p>
+          <h3>開心果莓果酥</h3>
+          <p class="jp" lang="ja">チューリップローズ ピスタチオベリー</p>
+          <p class="description">開心果朱古力忌廉同酸甜莓果，獨立包裝。池袋店冬限定，2026/11/1 至 2027 年 2 月中旬左右。</p>
+          <p class="sources"><a href="https://www.sogo-seibu.jp/ikebukuro/brand/tokyo-tulip-rose">店舖</a><a href="https://prtimes.jp/main/html/rd/p/000002156.000025606.html">商品及銷售期</a></p>
+        </div>
+        <ul class="prices" aria-label="價錢"><li>6 件 <strong>¥1,512</strong><small>約 HK$74</small></li></ul>
+      </article>
+      <article>
+        <a class="photo" href="https://sucreyshopping.jp/shop/g/g280100002/">
+          <img src="https://sucreyshopping.jp/img/goods/D1/280100002.jpg" data-backup="https://prcdn.freetls.fastly.net/release_image/16051/1673/16051-1673-82421e4e5975854ac95688c2422339b2-3900x3900.jpg?auto=webp&amp;bg-color=fff&amp;fit=bounds&amp;format=jpeg&amp;height=1350&amp;quality=85%2C65&amp;width=1950" alt="VANISTA 雪鹽雲呢拿夾心曲奇">
+          <span class="photo-label">商品相來源</span>
+        </a>
+        <div>
+          <p class="shop">VANISTA</p>
+          <h3>雪鹽雲呢拿夾心曲奇</h3>
+          <p class="jp" lang="ja">バニラサンドクッキー</p>
+          <p class="description">大溪地雲呢拿同宮古島雪鹽，偏甜。獨立包裝。14 件裝為西武池袋門市款。</p>
+          <p class="sources"><a href="https://sucreyshopping.jp/vanista/shoplist">店舖</a><a href="https://sucreyshopping.jp/shop/g/g280100002/">商品</a></p>
+        </div>
+        <ul class="prices" aria-label="價錢"><li>14 件 <strong>¥2,160</strong><small>約 HK$106</small></li></ul>
+      </article>
+      <article>
+        <a class="photo" href="https://gogyofuku.com/c/rec_dry/18790">
+          <img src="https://gogyofuku.itembox.design/product/011/000000001172/000000001172-01-l.jpg?t=20260109172210" data-backup="https://image.rakuten.co.jp/gogyofuku/cabinet/shin1/18790_780_fvz.jpg" alt="KOBE 伍魚福一杯の珍極卡芒貝爾芝士開心果">
+          <span class="photo-label">商品相來源</span>
+        </a>
+        <div>
+          <p class="shop">KOBE 伍魚福</p>
+          <h3>卡芒貝爾芝士開心果</h3>
+          <p class="jp" lang="ja">一杯の珍極 カマンベールピスタチオ</p>
+          <p class="description">卡芒貝爾芝士裹開心果，單袋零售。製造起 150 日。到店問貨。</p>
+          <p class="sources"><a href="https://www.gogyofuku.co.jp/seibuikebukuro">店舖</a><a href="https://www.gogyofuku.co.jp/news/20220216">商品</a><a href="https://shiire.gogyofuku.net/products/c/ippainochinkiwa/">參考價</a></p>
+        </div>
+        <ul class="prices" aria-label="價錢"><li>1 袋 <strong>¥354</strong><small>參考價・約 HK$17</small></li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="isp" aria-labelledby="isp-heading">
+    <h2 class="place" id="isp-heading"><span>池袋站東口地下</span> 池袋ショッピングパーク北館 B1</h2>
+    <div class="products">
+      <article>
+        <a class="photo" href="https://www.calbee.co.jp/jagapokkuru/products/jagapokkuru/">
+          <img src="https://www.calbee.co.jp/jagapokkuru/assets/img/products_jagapokkuru-pkg.png" data-backup="https://www.anafesta.com/assets/images/products/23_0652_01.jpg" alt="Calbee 鄂霍次克海鹽薯條 10 袋裝">
+          <span class="photo-label">商品相來源</span>
+        </a>
+        <div>
+          <p class="shop" lang="ja">北海道どさんこプラザ 池袋店</p>
+          <h3>Calbee 鄂霍次克海鹽薯條</h3>
+          <p class="jp" lang="ja">じゃがポックル オホーツクの塩味</p>
+          <p class="description">北海道連皮薯條，每小袋 18g。池袋店曾限賣，今次未查到再入貨公告，可先打 <a href="tel:+81339820170">03-3982-0170</a> 問。</p>
+          <p class="sources"><a href="https://www.web-isp.co.jp/floorguide/detail/?cd=000047">店舖</a><a href="https://web-isp.pictona.jp/scc-admin/asset/isp/000002/000002/9d88b61a.pdf">過往限賣</a><a href="https://www.anafesta.com/airports/wkj/23_0652/">參考價</a></p>
+        </div>
+        <ul class="prices" aria-label="價錢"><li>10 袋 <strong>¥1,211</strong><small>參考價・約 HK$60</small></li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="seiyu" aria-labelledby="seiyu-heading">
+    <h2 class="place" id="seiyu-heading"><span>東池袋</span> サンシャイン西友 2F 菓子部</h2>
+    <div class="products">
+      <article>
+        <a class="photo" href="https://prtimes.jp/main/html/rd/p/000001635.000030525.html">
+          <img src="https://prcdn.freetls.fastly.net/release_image/30525/1635/30525-1635-9c9a575eb41bc970ea8f42e9e33c3e62-634x448.png?auto=webp&amp;fit=bounds&amp;format=jpeg&amp;height=480&amp;width=720" data-backup="https://shop.r10s.jp/nishimuta/cabinet/image114/4901330504854_1.jpg" alt="Calbee 四小袋裝薯片">
+          <span class="photo-label">商品相來源</span>
+        </a>
+        <div>
+          <p class="shop" lang="ja">サンシャイン西友</p>
+          <h3>Calbee 四小袋薯片</h3>
+          <p class="jp" lang="ja">ポテトチップス たべよんパック</p>
+          <p class="description">淡鹽 <span lang="ja">うすしお味</span>／濃湯 <span lang="ja">コンソメパンチ</span>。兩款各 4 小袋，每袋 24g。西友網店有列，分店上架及售價待確認。</p>
+          <p class="sources"><a href="https://www.seiyu.co.jp/shop/%E3%82%B5%E3%83%B3%E3%82%B7%E3%83%A3%E3%82%A4%E3%83%B3%E8%A5%BF%E5%8F%8B/">店舖</a><a href="https://ikebukuro.kokosil.net/ja/place/00001c000000000000010000002207fc">樓層</a><a href="https://netsuper.rakuten.co.jp/seiyu/item/4901330504854/">淡鹽價</a><a href="https://netsuper.rakuten.co.jp/seiyu/item/4901330524210/">濃湯價</a></p>
+        </div>
+        <ul class="prices" aria-label="各口味價錢">
+          <li>淡鹽 <strong>¥398</strong><small>網店參考・約 HK$20</small></li>
+          <li>濃湯 <strong>¥398</strong><small>網店參考・約 HK$20</small></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>到店對賞味期限</strong>　如果 11 月 25 日買，Eric 同 YA 要揀 2027/1/7 或之後。小同、公司、中同同 Bod 要揀 2026/12/25 或之後。</p>
+    <p>部分商品相需要上網。如果相片未能載入，可撳「商品相來源」。</p>
+  </footer>
+</main>
+</body>
+</html>
