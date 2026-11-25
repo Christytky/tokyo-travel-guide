@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null && request.auth.token.email_verified == true;
+    }
+    match /members/{email} {
+      allow get: if signedIn() && request.auth.token.email == email;
+    }
+    match /trips/tokyo26/records/{id} {
+      function member() {
+        return signedIn() && exists(/databases/$(database)/documents/members/$(request.auth.token.email));
+      }
+      allow read: if member();
+      allow create: if member() && request.resource.data.id == id
+        && request.resource.data.type in ['expense','deposit','return','removal','item','opening'];
+      allow update: if member() && resource.data == request.resource.data;
+    }
+  }
+}
